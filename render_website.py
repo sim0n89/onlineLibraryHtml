@@ -25,7 +25,7 @@ def on_reload():
         file_path = os.path.join("pages", f"index{page_number}.html")
         current_page = page_number
         rendered_html = template.render(
-            title="Книги по научной фантастике",
+      
             books=book_list,
             page_count=page_count,
             current_page=current_page,
