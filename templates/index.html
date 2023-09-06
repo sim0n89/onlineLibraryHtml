@@ -40,7 +40,7 @@
       <div class="card mb-3" style="max-width: 540px">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img src="../media/{{book.img_src}}" class="card-img" alt="{{book.name}}" />
+            <img src="../media/{{book.img_src | urlencode}}" class="card-img" alt="{{book.name}}" />
           </div>
           <div class="col-md-8">
             <div class="card-body">
@@ -51,7 +51,7 @@
                   <span class="badge badge-light">{{jenre}}</span>
                 {% endfor %}
               </div>
-              <a class="card-text" href="../media/{{book.book_path}}">
+              <a class="card-text" href="../media/{{book.book_path | urlencode}}">
                 <small class="text-muted">Читать</small>
               </a>
             </div>
