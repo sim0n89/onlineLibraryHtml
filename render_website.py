@@ -1,19 +1,21 @@
+import argparse
 import json
+import os
+
+import more_itertools
 from jinja2 import Environment, FileSystemLoader
 from livereload import Server, shell
-import os
-import more_itertools
 
+FILEPATH = 'data.json'
 
 def on_reload():
-    with open("data.json", encoding="utf-8") as json_file:
+    with open(FILEPATH, encoding="utf-8") as json_file:
         books = json.load(json_file)
 
     env = Environment(loader=FileSystemLoader("."))
     template = env.get_template(
         "templates/index.html",
     )
-
     book_chunks = list(more_itertools.chunked(books, 10))
     page_count = len(book_chunks)
     for page_number, book_list in enumerate(book_chunks, 1):
@@ -30,7 +32,11 @@ def on_reload():
             output_file.write(rendered_html)
 
 
-on_reload()
-server = Server()
-server.watch("templates/*.html", on_reload)
-server.serve()
+def main():
+    on_reload()
+    server = Server()
+    server.watch("templates/*.html", on_reload)
+    server.serve()
+
+if __name__ == "__main__":
+    main()
